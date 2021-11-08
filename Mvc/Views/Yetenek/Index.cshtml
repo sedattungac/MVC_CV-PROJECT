@@ -1,0 +1,111 @@
+﻿@using Mvc.Models.Entity
+@model List<TblYeteneklerim>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{ string renk = "";}
+@{ string labelrenk = "";}
+<br />
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                
+                                <div style="float:left">
+
+                                    <h2 >Yetenek Listem</h2>
+
+                                </div>
+                                <div style="float:right">
+                                    <p>
+                                        <a href="/Yetenek/YetenekEkle/" class="btn btn-info">Yeni Yetenek Ekle</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Yetenek</th>
+                                            <th>Derece</th>
+                                            <th style="width: 40px">Oran</th>
+                                            <th>İşlemler</th>
+                                            <th>Sil</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var x in Model)
+                                        {
+                                            if (x.Oran >= 0 && x.Oran <= 50)
+                                            {
+                                                renk = "progress-bar bg-danger";
+                                                labelrenk = "badge bg-danger";
+                                            }
+                                            if (x.Oran >= 51 && x.Oran <= 70)
+                                            {
+                                                renk = "progress-bar bg-warning";
+                                                labelrenk = "badge bg-warning";
+                                            }
+                                            if (x.Oran >= 71 && x.Oran <= 84)
+                                            {
+                                                renk = "progress-bar bg-primary";
+                                                labelrenk = "badge bg-primary";
+                                            }
+                                            if (x.Oran >= 85 && x.Oran <= 100)
+                                            {
+                                                renk = "progress-bar bg-success";
+                                                labelrenk = "badge bg-success";
+                                            }
+                                            <tr>
+                                                <td>@x.ID</td>
+                                                <td>@x.Yetenek</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        <div class="@renk" style="width: @x.Oran%"></div>
+
+                                                    </div>
+                                                </td>
+                                                @*progress-bar progress-bar-danger*@
+                                                <td><span class="@labelrenk">@x.Oran%</span></td>
+                                                <td>
+                                                    <a class="btn btn-info btn-sm" href="/Yetenek/YetenekGetir/@x.ID">
+                                                        <i class="fas fa-cog">
+                                                        </i>
+                                                        Düzenle
+                                                    </a>
+
+                                                </td>
+                                                <td><a class="btn btn-danger btn-sm" href="/Yetenek/YetenekSil/@x.ID">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Sil
+                                                    </a></td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+</body>
+</html>

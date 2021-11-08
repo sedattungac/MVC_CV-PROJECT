@@ -1,0 +1,56 @@
+﻿@using Mvc.Models.Entity
+@model  List<TblHakkimda>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Hakkımda Düzenleme Sayfası</h2>
+<br />
+@using (Html.BeginForm("Index", "Hakkimda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <form method="post">
+        @foreach (var item in Model)
+        {
+            <label>Ad</label>
+            <br />
+            <input type="text" name="Ad" class="form-control" value="@item.Ad" />
+            <br />
+            <label>Soyad</label>
+            <br />
+            <input type="text" name="Soyad" class="form-control" value="@item.Soyad" />
+            <br />
+            <label>Adres</label>
+            <br />
+            <input type="text" name="Adres" class="form-control" value="@item.Adres" />
+            <br />
+            <label>Mail</label>
+            <br />
+            <input type="text" name="Mail" class="form-control" value="@item.Mail" />
+            <br />
+            <label>Telefon</label>
+            <br />
+            <input type="text" name="Telefon" class="form-control" value="@item.Telefon" />
+            <br />
+
+
+            <label>Resim</label>
+            <br />
+            @*<input type="text" name="Resim" class="form-control" value="@item.Resim" />*@
+            <input type="file" name="Resim" value="@item.Resim" />
+            
+            <br />
+            <br />
+
+
+            <label>Açıklama</label>
+            <br />
+            <textarea rows="5" class="form-control" name="Aciklama">@item.Aciklama</textarea>
+
+        }
+
+        <br />
+
+        <button class="btn btn-success">Güncelle</button>
+    </form>
+}

@@ -1,0 +1,136 @@
+﻿@using Mvc.Models.Entity
+@model List<TblSosyalMedya>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+
+
+<br />
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div style="float:left">
+
+                                    <h2>Sosyal Medya Hesap Listem</h2>
+
+                                </div>
+                                <div style="float:right">
+                                    <p>
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#Modal1">Yeni Sosyal Medya Hesabı Ekle</button>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Sosyal Medya</th>
+                                            <th>Durum</th>
+                                            <th>İşlemler</th>
+
+                                            <th>Sil</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var x in Model)
+                                        {
+
+                                            <tr>
+                                                <td>@x.ID</td>
+                                                <td>@x.Ad</td>
+                                                @if (@x.Durum == true)
+                                                {
+                                                    <td>
+                                                        <a class="btn btn-success btn-sm" href="/SosyalMedya/SosyalMedyaPasif/@x.ID">
+                                                            <i class="fas  fa-undo">
+                                                            </i>
+                                                            Aktif
+                                                        </a>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        <a class="btn btn-warning btn-sm"  style="color:white;" href="/SosyalMedya/SosyalMedyaAktif/@x.ID">
+                                                            <i class="fas  fa-undo">
+                                                            </i>
+                                                            Pasif
+                                                        </a>
+                                                    </td>
+                                                }
+
+
+
+                                                <td>
+                                                    <a class="btn btn-info btn-sm" href="/SosyalMedya/SosyalMedyaGetir/@x.ID">
+                                                        <i class="fas fa-cog">
+                                                        </i>
+                                                        Düzenle
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-danger btn-sm" href="/SosyalMedya/SosyalMedyaKaldir/@x.ID">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Kaldır
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+        <div class="modal" id="Modal1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Sosyal Medya Ekleme Penceresi</h2>
+                    </div>
+                    <form method="post" action="/SosyalMedya/SosyalMedyaEkle">
+                        <div class="modal-body">
+                            <label>Sosyal Medya İsmi</label>
+                            <input type="text" name="Ad" class="form-control" />
+                            <br />
+                            <label>Sosyal Medya Linki</label>
+                            <input type="text" name="Link" class="form-control" /><br />
+                            <label>İkon Değeri</label>
+                            <input type="text" name="ikon" class="form-control" /><br />
+                            <button class="btn btn-info">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

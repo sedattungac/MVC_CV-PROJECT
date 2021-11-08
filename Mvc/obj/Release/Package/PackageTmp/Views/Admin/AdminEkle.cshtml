@@ -1,0 +1,27 @@
+﻿@model  Mvc.Models.Entity.TblAdmin
+@{
+    ViewBag.Title = "AdminEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+
+<br />
+<h4>Yeni Kullanıcı Ekleme Sayfası</h4>
+<br />
+<form method="post">
+
+    <br />
+    @Html.Label("Kullanııc Adı*")
+    @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.KullaniciAdi, "", new { @style = "color:red" })
+    <br />
+    @Html.Label("Şifre*")
+    @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Sifre, "", new { @style = "color:red" })
+    <br />
+   
+    <button class="btn btn-info">Kaydet</button>
+</form>
